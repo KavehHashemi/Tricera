@@ -41,10 +41,10 @@ export const typeDefs = `#graphql
 
         # editUser(id:ID, sets:[Set]):User
         editSet(id:ID,name:String):Set
-        editCard(id:ID,question:String,answer:String):Card
+        editCard(set:ID,question:String,answer:String,id:ID):Card
 
         # deleteUser(id:ID):ID
         deleteSet(id:ID):ID
-        deleteCard(id:ID):ID
+        deleteCard(set:ID, id:ID):ID
     }
 `;

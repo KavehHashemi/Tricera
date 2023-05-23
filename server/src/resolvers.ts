@@ -7,10 +7,6 @@ export const resolvers = {
       let st = await Set.findById(id);
       return st.cards;
     },
-    // cards: async (_, { id }) => {
-    //   let cd = await Card.where((c: CardType) => c.set === id);
-    //   return cd;
-    // },
   },
   Mutation: {
     addSet: async (_, { name }) => {
@@ -40,7 +36,8 @@ export const resolvers = {
         }
       );
       if (result.acknowledged && result.modifiedCount === 1) {
-        return await Set.findOne({ _id: set });
+        let st = await Set.findOne({ _id: set });
+        return st.cards[st.cards.length - 1].question;
       }
     },
 
@@ -57,9 +54,37 @@ export const resolvers = {
         return await Set.findOne({ _id: id });
       }
     },
-    editCard: async () => {},
+    editCard: async (_, { question, answer, set, id }) => {
+      let result = await Set.updateOne(
+        { _id: set, "cards._id": id },
+        {
+          $set: { "cards.$.question": question, "cards.$.answer": answer },
+        }
+      );
+      if (result.acknowledged && result.modifiedCount === 1) {
+        return await Set.findOne({ _id: set });
+      }
+      return null;
+    },
 
-    deleteSet: async () => {},
-    deleteCard: async () => {},
+    deleteSet: async (_, { id }) => {
+      let result = await Set.deleteOne({ _id: id });
+      if (result.acknowledged && result.deletedCount === 1) {
+        return await id;
+      }
+      return null;
+    },
+    deleteCard: async (_, { set, id }) => {
+      let result = await Set.updateOne(
+        { _id: set, "cards._id": id },
+        {
+          $pull: { cards: { _id: id } },
+        }
+      );
+      if (result.acknowledged && result.upsertedCount === 1) {
+        return id;
+      }
+      return null;
+    },
   },
 };
