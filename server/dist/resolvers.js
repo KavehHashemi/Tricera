@@ -6,10 +6,6 @@ export const resolvers = {
             let st = await Set.findById(id);
             return st.cards;
         },
-        // cards: async (_, { id }) => {
-        //   let cd = await Card.where((c: CardType) => c.set === id);
-        //   return cd;
-        // },
     },
     Mutation: {
         addSet: async (_, { name }) => {
@@ -70,7 +66,6 @@ export const resolvers = {
             let result = await Set.updateOne({ _id: set, "cards._id": id }, {
                 $pull: { cards: { _id: id } },
             });
-            // let result = await Set.deleteOne({ _id: set, "cards._id": id });
             if (result.acknowledged && result.upsertedCount === 1) {
                 return id;
             }

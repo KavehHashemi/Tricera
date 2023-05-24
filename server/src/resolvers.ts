@@ -1,5 +1,4 @@
 import { Set } from "./mongoose.js";
-import { CardType } from "./types.js";
 export const resolvers = {
   Query: {
     sets: async () => await Set.find({}),
