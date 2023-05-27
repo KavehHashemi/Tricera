@@ -13,3 +13,16 @@ export const SETS_QUERY = gql`
     }
   }
 `;
+
+export const CARDS_QUERY = gql`
+  query Query($id: ID) {
+    cards(id: $id) {
+      id
+      question
+      answer
+      lastReading
+      history
+      createdAt
+    }
+  }
+`;
