@@ -1,7 +1,7 @@
 import { CardType } from "../types";
-import { handleDate } from "../utils";
 import { CARDS_QUERY } from "../graphql";
 import { useQuery } from "@apollo/client";
+import SingleCard from "./SingleCard";
 
 type props = {
   name: string | null;
@@ -14,7 +14,7 @@ const Cards = ({ name, id }: props) => {
   });
   if (loading) return <p>Loading...</p>;
   if (error) {
-    console.error("SETS_QUERY error", error);
+    console.error("CARDS_QUERY error", error);
     return <>{error.message}</>;
   } else {
     console.log(data.cards);
@@ -24,12 +24,15 @@ const Cards = ({ name, id }: props) => {
         <div>{name}</div>
         {data.cards?.map((cd: CardType, i: number) => {
           return (
-            <div key={i}>
-              <div>{cd.question}</div>
-              <div>{cd.answer}</div>
-              <div>{handleDate(cd.lastReading)}</div>
-              <div>{handleDate(cd.createdAt)}</div>
-            </div>
+            <SingleCard
+              key={i}
+              question={cd.question}
+              answer={cd.answer}
+              id={cd.id}
+              createdAt={cd.createdAt}
+              lastReading={cd.lastReading}
+              history={[]}
+            ></SingleCard>
           );
         })}
       </>

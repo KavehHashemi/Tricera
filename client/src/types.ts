@@ -7,6 +7,7 @@ export type SetType = {
 };
 
 export type CardType = {
+  id: string;
   question: string;
   answer: string;
   lastReading: string;

@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { SETS_QUERY } from "../graphql";
 import { SetType } from "../types";
 import SingleSet from "./SingleSet";
+import AddSetDialog from "./AddSetDialog";
 
 const Sets = () => {
   const { data, loading, error } = useQuery(SETS_QUERY);
@@ -24,6 +25,7 @@ const Sets = () => {
             ></SingleSet>
           );
         })}
+        <AddSetDialog></AddSetDialog>
       </div>
     );
   }
