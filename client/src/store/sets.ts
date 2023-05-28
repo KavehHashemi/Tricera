@@ -17,8 +17,6 @@ export const setsSlice = createSlice({
     setCurrentSet: (state, action) => {
       state.currentSet.id = action.payload.id;
       state.currentSet.name = action.payload.name;
-      console.log(action.payload);
-      // console.log(`current set is ${state.currentSet}`);
     },
   },
 });

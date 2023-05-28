@@ -1,3 +1,4 @@
+import "../style/style.scss";
 import { useState } from "react";
 import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
@@ -8,8 +9,10 @@ import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import { useMutation } from "@apollo/client";
 import { ADD_SET_MUTATION, SETS_QUERY } from "../graphql";
+import { useAppSelector } from "../store/hooks";
 
 const AddSetDialog = () => {
+  const { isLightMode } = useAppSelector((state) => state.mode);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [addSetMutation] = useMutation(ADD_SET_MUTATION, {
@@ -22,7 +25,10 @@ const AddSetDialog = () => {
   };
   return (
     <>
-      <div style={{ cursor: "pointer" }} onClick={() => setOpen(true)}>
+      <div
+        className={isLightMode ? "new-card-l" : "new-card"}
+        onClick={() => setOpen(true)}
+      >
         <AddIcon></AddIcon>
       </div>
       <Dialog open={open} onClose={() => setOpen(false)}>

@@ -11,7 +11,7 @@ type props = {
   id: string;
   setId: string;
 };
-const DeleteCardDiallog = ({ id, setId }: props) => {
+const DeleteCardDialog = ({ id, setId }: props) => {
   const [open, setOpen] = useState(false);
   const [deleteCardMutation] = useMutation(DELETE_CARD_MUTATION, {
     refetchQueries: [
@@ -19,7 +19,7 @@ const DeleteCardDiallog = ({ id, setId }: props) => {
       { query: SETS_QUERY },
     ],
   });
-  const editCard = () => {
+  const deleteCard = () => {
     deleteCardMutation({
       variables: {
         id: id,
@@ -37,11 +37,11 @@ const DeleteCardDiallog = ({ id, setId }: props) => {
         <Title>Delete Card</Title>
         <Content>Are you sure you want to delete this card?</Content>
         <Actions>
-          <Button onClick={editCard}>Delete</Button>
+          <Button onClick={deleteCard}>Delete</Button>
         </Actions>
       </Dialog>
     </>
   );
 };
 
-export default DeleteCardDiallog;
+export default DeleteCardDialog;

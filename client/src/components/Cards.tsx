@@ -1,3 +1,4 @@
+import "../style/style.scss";
 import { CardType } from "../types";
 import { CARDS_QUERY } from "../graphql";
 import { useQuery } from "@apollo/client";
@@ -9,7 +10,7 @@ type props = {
   id: string | null;
 };
 
-const Cards = ({ name, id }: props) => {
+const Cards = ({ id }: props) => {
   const { data, loading, error } = useQuery(CARDS_QUERY, {
     variables: { id },
   });
@@ -18,11 +19,8 @@ const Cards = ({ name, id }: props) => {
     console.error("CARDS_QUERY error", error);
     return <>{error.message}</>;
   } else {
-    console.log(data.cards);
-
     return (
-      <>
-        <div>{name}</div>
+      <div className="container">
         {data.cards?.map((cd: CardType, i: number) => {
           return (
             <SingleCard
@@ -38,7 +36,7 @@ const Cards = ({ name, id }: props) => {
           );
         })}
         <AddCardDialog setId={id ?? ""}></AddCardDialog>
-      </>
+      </div>
     );
   }
 };

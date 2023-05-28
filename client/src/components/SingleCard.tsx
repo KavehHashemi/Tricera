@@ -1,5 +1,7 @@
+import { useAppSelector } from "../store/hooks";
+import "../style/style.scss";
 import { handleDate } from "../utils";
-import DeleteCardDiallog from "./DeleteCardDiallog";
+import DeleteCardDialog from "./DeleteCardDialog";
 import EditCardDialog from "./EditCardDialog";
 
 type props = {
@@ -20,22 +22,22 @@ const SingleCard = ({
   createdAt,
   set,
 }: props) => {
+  const { isLightMode } = useAppSelector((state) => state.mode);
   return (
-    <div
-      id={id}
-      style={{ border: "1px solid", backgroundColor: "#333", padding: "1rem" }}
-    >
+    <div id={id} className={isLightMode ? "card-l" : "card"}>
       <div>{question}</div>
       <div>{answer}</div>
       <div>{handleDate(lastReading)}</div>
       <div>{handleDate(createdAt)}</div>
-      <EditCardDialog
-        question={question}
-        answer={answer}
-        id={id}
-        setId={set ?? ""}
-      ></EditCardDialog>
-      <DeleteCardDiallog id={id} setId={set ?? ""}></DeleteCardDiallog>
+      <div className="card-actions">
+        <EditCardDialog
+          question={question}
+          answer={answer}
+          id={id}
+          setId={set ?? ""}
+        ></EditCardDialog>
+        <DeleteCardDialog id={id} setId={set ?? ""}></DeleteCardDialog>
+      </div>
     </div>
   );
 };

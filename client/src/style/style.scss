@@ -1,0 +1,38 @@
+@use "navbar";
+@use "container";
+@use "card";
+
+body {
+    margin: 0;
+}
+
+.app {
+    background-color: #000;
+    color: lightgrey;
+    height: 100vh;
+    a,
+    #heading {
+        color: #c8ff00;
+        text-decoration: none;
+        font-weight: 500;
+    }
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 1rem;
+}
+
+.app-l {
+    background-color: #f5f5f5;
+    color: #242424;
+    height: 100vh;
+    a,
+    #heading {
+        color: #002357;
+        text-decoration: none;
+        font-weight: 500;
+    }
+}
