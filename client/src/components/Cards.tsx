@@ -2,6 +2,7 @@ import { CardType } from "../types";
 import { CARDS_QUERY } from "../graphql";
 import { useQuery } from "@apollo/client";
 import SingleCard from "./SingleCard";
+import AddCardDialog from "./AddCardDialog";
 
 type props = {
   name: string | null;
@@ -32,9 +33,11 @@ const Cards = ({ name, id }: props) => {
               createdAt={cd.createdAt}
               lastReading={cd.lastReading}
               history={[]}
+              set={id}
             ></SingleCard>
           );
         })}
+        <AddCardDialog setId={id ?? ""}></AddCardDialog>
       </>
     );
   }

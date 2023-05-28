@@ -28,7 +28,7 @@ export const CARDS_QUERY = gql`
   }
 `;
 
-///MUTATIONS-SET
+///SET-MUTATIONS
 export const ADD_SET_MUTATION = gql`
   mutation Mutation($name: String) {
     addSet(name: $name) {
@@ -57,7 +57,7 @@ export const DELETE_SET_MUTATION = gql`
   }
 `;
 
-///MUTATIONS-CARD
+///CARD-MUTATIONS
 export const ADD_CARD_MUTATION = gql`
   mutation Mutation(
     $question: String

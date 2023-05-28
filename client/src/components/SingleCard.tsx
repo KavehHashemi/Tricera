@@ -1,4 +1,6 @@
 import { handleDate } from "../utils";
+import DeleteCardDiallog from "./DeleteCardDiallog";
+import EditCardDialog from "./EditCardDialog";
 
 type props = {
   id: string;
@@ -7,6 +9,7 @@ type props = {
   createdAt: string;
   lastReading: string;
   history: boolean[];
+  set: string | null;
 };
 
 const SingleCard = ({
@@ -15,6 +18,7 @@ const SingleCard = ({
   answer,
   lastReading,
   createdAt,
+  set,
 }: props) => {
   return (
     <div
@@ -25,6 +29,13 @@ const SingleCard = ({
       <div>{answer}</div>
       <div>{handleDate(lastReading)}</div>
       <div>{handleDate(createdAt)}</div>
+      <EditCardDialog
+        question={question}
+        answer={answer}
+        id={id}
+        setId={set ?? ""}
+      ></EditCardDialog>
+      <DeleteCardDiallog id={id} setId={set ?? ""}></DeleteCardDiallog>
     </div>
   );
 };
