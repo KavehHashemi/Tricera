@@ -7,6 +7,7 @@ import Content from "@mui/material/DialogContent";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useMutation } from "@apollo/client";
 import { DELETE_SET_MUTATION, SETS_QUERY } from "../graphql";
+import { useAppSelector } from "../store/hooks";
 
 type props = {
   id: string;
@@ -14,6 +15,7 @@ type props = {
 };
 
 const DeleteSetDialog = ({ id, name }: props) => {
+  const { isLightMode } = useAppSelector((state) => state.mode);
   const [open, setOpen] = useState(false);
   const [deleteSetMutation] = useMutation(DELETE_SET_MUTATION, {
     refetchQueries: [{ query: SETS_QUERY }],
@@ -28,7 +30,9 @@ const DeleteSetDialog = ({ id, name }: props) => {
         <DeleteIcon></DeleteIcon>
       </div>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <Title>Delete Set {name}</Title>
+        <Title sx={{ color: isLightMode ? "#242424" : "whitesmoke" }}>
+          Delete Set {name}
+        </Title>
         <Content>
           <div>Are you sure you want to delete set {name}?</div>
         </Content>

@@ -32,7 +32,9 @@ const AddSetDialog = () => {
         <AddIcon></AddIcon>
       </div>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <Title>Add New Set</Title>
+        <Title sx={{ color: isLightMode ? "#242424" : "whitesmoke" }}>
+          Add New Set
+        </Title>
         <Content>
           <TextField
             name="set-name"

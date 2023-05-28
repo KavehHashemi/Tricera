@@ -8,6 +8,7 @@ import TextField from "@mui/material/TextField";
 import EditIcon from "@mui/icons-material/Edit";
 import { useMutation } from "@apollo/client";
 import { CARDS_QUERY, EDIT_CARD_MUTATION } from "../graphql";
+import { useAppSelector } from "../store/hooks";
 type props = {
   id: string;
   question: string;
@@ -16,6 +17,7 @@ type props = {
 };
 
 const EditCardDialog = ({ id, question, answer, setId }: props) => {
+  const { isLightMode } = useAppSelector((state) => state.mode);
   const [open, setOpen] = useState(false);
   const [editedCard, setEditedCard] = useState<props>({
     question: question,
@@ -49,7 +51,9 @@ const EditCardDialog = ({ id, question, answer, setId }: props) => {
         <EditIcon></EditIcon>
       </div>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <Title>Edit Card</Title>
+        <Title sx={{ color: isLightMode ? "#242424" : "whitesmoke" }}>
+          Edit Card
+        </Title>
         <Content>
           <TextField
             name="card-question"

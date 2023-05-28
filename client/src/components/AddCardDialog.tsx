@@ -54,7 +54,9 @@ const AddCardDialog = ({ setId }: props) => {
         <AddIcon></AddIcon>
       </div>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <Title>Add New Card</Title>
+        <Title sx={{ color: isLightMode ? "#242424" : "whitesmoke" }}>
+          Add New Card
+        </Title>
         <Content>
           <TextField
             name="card-question"
