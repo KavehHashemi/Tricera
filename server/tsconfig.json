@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
-    "rootDirs": ["src"],
-    "outDir": "dist",
-    "lib": ["es2020"],
     "target": "es2020",
     "module": "esnext",
-    "moduleResolution": "node",
+    "outDir": "dist",
     "esModuleInterop": true,
+
+    "rootDirs": ["src"],
+    "lib": ["es2020"],
+    "moduleResolution": "node",
     "types": ["node"]
   }
 }

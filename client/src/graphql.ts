@@ -1,6 +1,7 @@
 import { gql } from "@apollo/client";
 
 ///QUERIES
+
 export const SETS_QUERY = gql`
   query Query {
     sets {
@@ -15,8 +16,21 @@ export const SETS_QUERY = gql`
   }
 `;
 
+// export const CARDS_QUERY = gql`
+//   query Query($id: ID) {
+//     cards(id: $id) {
+//       id
+//       question
+//       answer
+//       lastReading
+//       history
+//       createdAt
+//     }
+//   }
+// `;
+
 export const CARDS_QUERY = gql`
-  query Query($id: ID) {
+  query Cards($id: ID) {
     cards(id: $id) {
       id
       question

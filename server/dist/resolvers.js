@@ -1,9 +1,18 @@
+import { GraphQLError } from "graphql";
 import { Set } from "./mongoose.js";
 export const resolvers = {
     Query: {
-        sets: async () => await Set.find({}),
+        sets: async (parent, args, context, info) => {
+            if (!context.auth.isAuthenticated) {
+                throw new GraphQLError("User Not Authenticated");
+            }
+            else {
+                return await Set.find({});
+            }
+        },
         cards: async (_, { id }) => {
-            let st = await Set.findById(id);
+            // cards: async (parent: any, { id }, context: CTXType, info: any) => {
+            const st = await Set.findById(id);
             return st.cards;
         },
     },

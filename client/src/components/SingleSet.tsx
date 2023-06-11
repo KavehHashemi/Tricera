@@ -19,10 +19,10 @@ const SingleSet = ({ id, name, createdAt, lastReading, cards }: SetType) => {
       <div id={id} onClick={() => handleClick()}>
         <Link to={`/sets/${name}`}>
           <div>{name}</div>
+          <div>{handleDate(createdAt)}</div>
+          <div>{handleDate(lastReading)}</div>
+          <div>{cards.length}</div>
         </Link>
-        <div>{handleDate(createdAt)}</div>
-        <div>{handleDate(lastReading)}</div>
-        <div>{cards.length}</div>
       </div>
       <div className="card-actions">
         <EditSetDialog oldName={name} id={id}></EditSetDialog>

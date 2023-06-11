@@ -21,10 +21,10 @@ const Cards = ({ id }: props) => {
   } else {
     return (
       <div className="container">
-        {data.cards?.map((cd: CardType, i: number) => {
+        {data.cards?.map((cd: CardType) => {
           return (
             <SingleCard
-              key={i}
+              key={cd.id}
               question={cd.question}
               answer={cd.answer}
               id={cd.id}

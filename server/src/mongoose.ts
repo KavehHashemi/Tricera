@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const setSchema = new mongoose.Schema({
   name: String!,
   lastReading: String,
@@ -15,13 +14,3 @@ const setSchema = new mongoose.Schema({
   ],
 });
 export const Set = mongoose.model("Set", setSchema);
-
-// const cardSchema = new mongoose.Schema({
-//   question: String,
-//   answer: String,
-//   set: String,
-//   lastReading: Number,
-//   createdAt: Number,
-//   history: [Boolean],
-// });
-// export const Card = mongoose.model("Card", cardSchema);

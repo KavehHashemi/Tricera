@@ -10,11 +10,14 @@ import Dark from "@mui/icons-material/DarkMode";
 import { setLightMode } from "./store/mode";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Home from "./components/Home";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const { user } = useAuth0();
   const { currentSet } = useAppSelector((state) => state.sets);
   const { isLightMode } = useAppSelector((state) => state.mode);
+
   const theme = createTheme({
     components: {
       MuiFormLabel: {
@@ -55,14 +58,17 @@ const App = () => {
             )}
             <div id="heading">{currentSet.name}</div>
           </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Dark fontSize="small"></Dark>
-            <Switch
-              color="default"
-              checked={isLightMode}
-              onChange={() => dispatch(setLightMode(!isLightMode))}
-            ></Switch>
-            <Light fontSize="small"></Light>
+          <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+            {user ? <div>{user?.nickname}</div> : <div></div>}
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Dark fontSize="small"></Dark>
+              <Switch
+                color="default"
+                checked={isLightMode}
+                onChange={() => dispatch(setLightMode(!isLightMode))}
+              ></Switch>
+              <Light fontSize="small"></Light>
+            </div>
           </div>
         </nav>
         <Routes>
