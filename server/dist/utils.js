@@ -1,8 +1,10 @@
 import jwt from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
+import { environmentVariables as EV } from "./consts.js";
 export const verifyToken = async (bearerToken) => {
     const client = jwksClient({
-        jwksUri: "https://dev-jjwjtd6elz5b5q0y.us.auth0.com/.well-known/jwks.json",
+        jwksUri: `https://${EV.issuer}.well-known/jwks.json`,
+        // jwksUri: `https://dev-jjwjtd6elz5b5q0y.us.auth0.com/.well-known/jwks.json`,
     });
     const decodedToken = jwt.decode(bearerToken, { complete: true });
     const kid = decodedToken.header.kid;
@@ -10,8 +12,9 @@ export const verifyToken = async (bearerToken) => {
     const signingKey = key.getPublicKey();
     return new Promise((resolve, reject) => {
         jwt.verify(bearerToken, signingKey, {
-            audience: "http://localhost:4000/",
-            issuer: "https://dev-jjwjtd6elz5b5q0y.us.auth0.com/",
+            // audience: "http://localhost:4000/",
+            audience: EV.audience,
+            issuer: `https://${EV.issuer}`,
             algorithms: ["RS256"],
         }, (err, decoded) => {
             if (err)
