@@ -1,4 +1,4 @@
-import "../style/style.scss";
+import "../../style/style.scss";
 import { useState } from "react";
 import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
@@ -8,18 +8,29 @@ import Content from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import { useMutation } from "@apollo/client";
-import { ADD_SET_MUTATION, SETS_QUERY } from "../graphql";
-import { useAppSelector } from "../store/hooks";
+import { ADD_SET_MUTATION, USER_SETS_QUERY } from "../../graphql";
+import { useAppSelector } from "../../store/hooks";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const AddSetDialog = () => {
+  const { user } = useAuth0();
+  const owner = user?.sub?.split("|")[1];
   const { isLightMode } = useAppSelector((state) => state.mode);
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [addSetMutation] = useMutation(ADD_SET_MUTATION, {
-    refetchQueries: [{ query: SETS_QUERY }],
+    refetchQueries: [
+      {
+        query: USER_SETS_QUERY,
+        variables: { userId: owner },
+      },
+    ],
   });
   const saveNewSet = () => {
-    addSetMutation({ variables: { name: name } });
+    console.log(owner);
+    addSetMutation({
+      variables: { name: name, owner: owner },
+    });
     setName("");
     setOpen(false);
   };

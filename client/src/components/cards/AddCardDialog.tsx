@@ -1,4 +1,4 @@
-import "../style/style.scss";
+import "../../style/style.scss";
 import { useState } from "react";
 import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
@@ -8,9 +8,9 @@ import Content from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
 import AddIcon from "@mui/icons-material/Add";
 import { useMutation } from "@apollo/client";
-import { ADD_CARD_MUTATION, CARDS_QUERY, SETS_QUERY } from "../graphql";
-import { CardType } from "../types";
-import { useAppSelector } from "../store/hooks";
+import { ADD_CARD_MUTATION, CARDS_QUERY, SETS_QUERY } from "../../graphql";
+import { CardType } from "../../types";
+import { useAppSelector } from "../../store/hooks";
 
 const initialValue: CardType = {
   question: "",

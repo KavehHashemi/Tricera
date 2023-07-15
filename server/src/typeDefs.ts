@@ -1,15 +1,12 @@
 export const typeDefs = `#graphql
   type Set {
     id:ID
+    owner:String
     name:String
     cards:[Card]
     lastReading:String
     createdAt:String
   }
-
-  # input SetInput {
-  #   id:ID
-  # }
 
   type Card {
     id:ID
@@ -21,13 +18,13 @@ export const typeDefs = `#graphql
   }
 
   type Query {
-    sets:[Set]
+    sets(userId:ID):[Set]
     cards(id:ID):[Card]
     # introduction(intro:String):String  
   }
 
   type Mutation {
-        addSet(name:String):Set
+        addSet(name:String,owner:String):Set
         addCard(question:String,answer:String,set:String,createdAt:String,lastReading:String):Card
 
         editSet(id:ID,name:String):Set

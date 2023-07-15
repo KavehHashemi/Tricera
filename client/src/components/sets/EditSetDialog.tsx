@@ -7,8 +7,8 @@ import Content from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
 import EditIcon from "@mui/icons-material/Edit";
 import { useMutation } from "@apollo/client";
-import { EDIT_SET_MUTATION, SETS_QUERY } from "../graphql";
-import { useAppSelector } from "../store/hooks";
+import { EDIT_SET_MUTATION, SETS_QUERY } from "../../graphql";
+import { useAppSelector } from "../../store/hooks";
 
 type props = {
   oldName: string;

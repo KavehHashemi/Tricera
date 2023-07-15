@@ -6,22 +6,28 @@ import Actions from "@mui/material/DialogActions";
 import Content from "@mui/material/DialogContent";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useMutation } from "@apollo/client";
-import { DELETE_SET_MUTATION, SETS_QUERY } from "../graphql";
-import { useAppSelector } from "../store/hooks";
-
+import { CARDS_QUERY, DELETE_CARD_MUTATION, SETS_QUERY } from "../../graphql";
+import { useAppSelector } from "../../store/hooks";
 type props = {
   id: string;
-  name: string;
+  setId: string;
 };
-
-const DeleteSetDialog = ({ id, name }: props) => {
+const DeleteCardDialog = ({ id, setId }: props) => {
   const { isLightMode } = useAppSelector((state) => state.mode);
   const [open, setOpen] = useState(false);
-  const [deleteSetMutation] = useMutation(DELETE_SET_MUTATION, {
-    refetchQueries: [{ query: SETS_QUERY }],
+  const [deleteCardMutation] = useMutation(DELETE_CARD_MUTATION, {
+    refetchQueries: [
+      { query: CARDS_QUERY, variables: { id: setId } },
+      { query: SETS_QUERY },
+    ],
   });
-  const deleteSet = () => {
-    deleteSetMutation({ variables: { id: id } });
+  const deleteCard = () => {
+    deleteCardMutation({
+      variables: {
+        id: id,
+        set: setId,
+      },
+    });
     setOpen(false);
   };
   return (
@@ -31,17 +37,15 @@ const DeleteSetDialog = ({ id, name }: props) => {
       </div>
       <Dialog open={open} onClose={() => setOpen(false)}>
         <Title sx={{ color: isLightMode ? "#242424" : "whitesmoke" }}>
-          Delete Set {name}
+          Delete Card
         </Title>
-        <Content>
-          <div>Are you sure you want to delete set {name}?</div>
-        </Content>
+        <Content>Are you sure you want to delete this card?</Content>
         <Actions>
-          <Button onClick={deleteSet}>Delete</Button>
+          <Button onClick={deleteCard}>Delete</Button>
         </Actions>
       </Dialog>
     </>
   );
 };
 
-export default DeleteSetDialog;
+export default DeleteCardDialog;

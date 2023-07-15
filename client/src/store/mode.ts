@@ -8,7 +8,7 @@ const initialState: urlProps = {
   isLightMode: false,
 };
 
-export const setsSlice = createSlice({
+export const modeSlice = createSlice({
   name: "mode",
   initialState,
   reducers: {
@@ -17,5 +17,5 @@ export const setsSlice = createSlice({
     },
   },
 });
-export const { setLightMode } = setsSlice.actions;
-export default setsSlice.reducer;
+export const { setLightMode } = modeSlice.actions;
+export default modeSlice.reducer;

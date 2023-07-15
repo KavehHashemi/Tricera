@@ -16,18 +16,20 @@ export const SETS_QUERY = gql`
   }
 `;
 
-// export const CARDS_QUERY = gql`
-//   query Query($id: ID) {
-//     cards(id: $id) {
-//       id
-//       question
-//       answer
-//       lastReading
-//       history
-//       createdAt
-//     }
-//   }
-// `;
+export const USER_SETS_QUERY = gql`
+  query Query($userId: ID) {
+    sets(userId: $userId) {
+      id
+      owner
+      name
+      lastReading
+      createdAt
+      cards {
+        id
+      }
+    }
+  }
+`;
 
 export const CARDS_QUERY = gql`
   query Cards($id: ID) {
@@ -44,9 +46,10 @@ export const CARDS_QUERY = gql`
 
 ///SET-MUTATIONS
 export const ADD_SET_MUTATION = gql`
-  mutation Mutation($name: String) {
-    addSet(name: $name) {
+  mutation Mutation($name: String, $owner: String) {
+    addSet(name: $name, owner: $owner) {
       id
+      owner
       name
       cards {
         question

@@ -2,37 +2,23 @@
 @use "container";
 @use "card";
 
-body {
-    margin: 0;
-}
-
-.app {
-    background-color: #000;
-    color: lightgrey;
-    height: 100vh;
-    a,
-    #heading {
-        color: #c8ff00;
-        text-decoration: none;
-        font-weight: 500;
-    }
-}
-
 #root {
     display: flex;
     flex-direction: column;
     justify-content: start;
     gap: 1rem;
+    height: 100vh;
 }
 
-.app-l {
-    background-color: #f5f5f5;
-    color: #242424;
-    height: 100vh;
+body {
+    margin: 0;
+    // background-color: #000;
+
     a,
+    text,
     #heading {
-        color: #002357;
+        // color: #c8ff00;
         text-decoration: none;
-        font-weight: 500;
+        // font-weight: 500;
     }
 }

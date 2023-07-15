@@ -7,8 +7,8 @@ import Content from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
 import EditIcon from "@mui/icons-material/Edit";
 import { useMutation } from "@apollo/client";
-import { CARDS_QUERY, EDIT_CARD_MUTATION } from "../graphql";
-import { useAppSelector } from "../store/hooks";
+import { CARDS_QUERY, EDIT_CARD_MUTATION } from "../../graphql";
+import { useAppSelector } from "../../store/hooks";
 type props = {
   id: string;
   question: string;

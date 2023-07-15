@@ -9,6 +9,7 @@ export type CardType = {
 
 export type SetType = {
   id: String;
+  owner: String;
   name: String;
   cards: CardType[];
   lastReading: String;

@@ -1,31 +1,35 @@
 import { GraphQLError } from "graphql";
 import { Set } from "./mongoose.js";
+
 type CTXType = {
   auth: {
     isAuthenticated: boolean;
     token: String;
   };
 };
+
 export const resolvers = {
   Query: {
-    sets: async (parent: any, args: any, context: CTXType, info: any) => {
+    sets: async (parent: any, { userId }, context: CTXType, info: any) => {
       if (!context.auth.isAuthenticated) {
         throw new GraphQLError("User Not Authenticated");
       } else {
-        return await Set.find({});
+        return await Set.find({ owner: userId });
       }
     },
     cards: async (_, { id }) => {
-      // cards: async (parent: any, { id }, context: CTXType, info: any) => {
       const st = await Set.findById(id);
       return st.cards;
     },
   },
   Mutation: {
-    addSet: async (_, { name }) => {
+    addSet: async (_, { name, owner }) => {
+      console.log(`mutation; owner is:`);
+      console.log(owner);
       let now = Date.now().toString();
       const newSet = new Set({
         name: name as String,
+        owner: owner as String,
         createdAt: now,
         lastReading: now,
         cards: [],

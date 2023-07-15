@@ -1,6 +1,6 @@
-import "../style/style.scss";
-import { CardType } from "../types";
-import { CARDS_QUERY } from "../graphql";
+import "../../style/style.scss";
+import { CardType } from "../../types";
+import { CARDS_QUERY } from "../../graphql";
 import { useQuery } from "@apollo/client";
 import SingleCard from "./SingleCard";
 import AddCardDialog from "./AddCardDialog";

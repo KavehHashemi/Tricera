@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 const setSchema = new mongoose.Schema({
   name: String!,
+  owner: String!,
   lastReading: String,
   createdAt: String,
   cards: [

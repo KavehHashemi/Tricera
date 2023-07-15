@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
-import { environmentVariables as EV } from "./consts.js";
+import { environmentVariables as EV } from "./const.js";
 
 export const verifyToken = async (bearerToken: string) => {
   const client = jwksClient({
