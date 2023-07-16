@@ -8,7 +8,6 @@ import TextField from "@mui/material/TextField";
 import EditIcon from "@mui/icons-material/Edit";
 import { useMutation } from "@apollo/client";
 import { CARDS_QUERY, EDIT_CARD_MUTATION } from "../../graphql";
-import { useAppSelector } from "../../store/hooks";
 type props = {
   id: string;
   question: string;
@@ -17,7 +16,6 @@ type props = {
 };
 
 const EditCardDialog = ({ id, question, answer, setId }: props) => {
-  const { isLightMode } = useAppSelector((state) => state.mode);
   const [open, setOpen] = useState(false);
   const [editedCard, setEditedCard] = useState<props>({
     question: question,
@@ -38,12 +36,6 @@ const EditCardDialog = ({ id, question, answer, setId }: props) => {
       },
     });
     setOpen(false);
-    // setEditedCard({
-    //   question: question,
-    //   answer: answer,
-    //   id: id,
-    //   setId: setId,
-    // });
   };
   return (
     <>
@@ -51,28 +43,28 @@ const EditCardDialog = ({ id, question, answer, setId }: props) => {
         <EditIcon></EditIcon>
       </div>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <Title sx={{ color: isLightMode ? "#242424" : "whitesmoke" }}>
-          Edit Card
-        </Title>
+        <Title>Edit Card</Title>
         <Content>
-          <TextField
-            name="card-question"
-            label="Question"
-            variant="outlined"
-            value={editedCard.question}
-            onChange={(e) =>
-              setEditedCard({ ...editedCard, question: e.target.value })
-            }
-          ></TextField>
-          <TextField
-            name="card-answer"
-            label="Answer"
-            variant="outlined"
-            value={editedCard.answer}
-            onChange={(e) =>
-              setEditedCard({ ...editedCard, answer: e.target.value })
-            }
-          ></TextField>
+          <div className="dialog">
+            <TextField
+              name="card-question"
+              label="Question"
+              variant="outlined"
+              value={editedCard.question}
+              onChange={(e) =>
+                setEditedCard({ ...editedCard, question: e.target.value })
+              }
+            ></TextField>
+            <TextField
+              name="card-answer"
+              label="Answer"
+              variant="outlined"
+              value={editedCard.answer}
+              onChange={(e) =>
+                setEditedCard({ ...editedCard, answer: e.target.value })
+              }
+            ></TextField>
+          </div>
         </Content>
         <Actions>
           <Button onClick={editCard}>Edit</Button>

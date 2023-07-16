@@ -8,7 +8,6 @@ import TextField from "@mui/material/TextField";
 import EditIcon from "@mui/icons-material/Edit";
 import { useMutation } from "@apollo/client";
 import { EDIT_SET_MUTATION, SETS_QUERY } from "../../graphql";
-import { useAppSelector } from "../../store/hooks";
 
 type props = {
   oldName: string;
@@ -16,8 +15,6 @@ type props = {
 };
 
 const EditSetDialog = ({ oldName, id }: props) => {
-  const { isLightMode } = useAppSelector((state) => state.mode);
-
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(oldName);
   const [editSetMutation] = useMutation(EDIT_SET_MUTATION, {
@@ -34,17 +31,17 @@ const EditSetDialog = ({ oldName, id }: props) => {
         <EditIcon></EditIcon>
       </div>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <Title sx={{ color: isLightMode ? "#242424" : "whitesmoke" }}>
-          Edit Set {oldName}
-        </Title>
+        <Title>Edit Set {oldName}</Title>
         <Content>
-          <TextField
-            name="edit-name"
-            label="Edit Name"
-            variant="outlined"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></TextField>
+          <div className="dialog">
+            <TextField
+              name="edit-name"
+              label="Edit Name"
+              variant="outlined"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></TextField>
+          </div>
         </Content>
         <Actions>
           <Button onClick={editNewSet}>Edit</Button>

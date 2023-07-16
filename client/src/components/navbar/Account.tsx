@@ -1,10 +1,9 @@
+import "../../style/style.scss";
 import { useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Popover from "@mui/material/Popover";
-
-// type props = {
-//   user: string | undefined;
-// };
+import Button from "@mui/material/Button";
+import { CardContent, Paper } from "@mui/material";
 
 const Account = () => {
   const { user, logout, loginWithRedirect } = useAuth0();
@@ -21,22 +20,24 @@ const Account = () => {
   if (user)
     return (
       <>
-        <button onClick={handleClick}>{user.nickname}</button>
+        <Button onClick={handleClick}>{user.nickname}</Button>
         <Popover
           open={open}
           anchorEl={anchorEl}
           onClose={handleClose}
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "left",
+            horizontal: "center",
           }}
         >
-          <div onClick={() => logout()}>Logout from {user.nickname}</div>
+          <CardContent sx={{ cursor: "pointer" }} onClick={() => logout()}>
+            Logout
+          </CardContent>
         </Popover>
       </>
     );
   else {
-    return <div onClick={() => loginWithRedirect()}>login</div>;
+    return <Button onClick={() => loginWithRedirect()}>login</Button>;
   }
 };
 

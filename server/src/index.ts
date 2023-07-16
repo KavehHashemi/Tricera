@@ -4,6 +4,7 @@ import { resolvers } from "./resolvers.js";
 import { typeDefs } from "./typeDefs.js";
 import mongoose from "mongoose";
 import { verifyToken } from "./utils.js";
+import { environmentVariables } from "./const.js";
 
 const server = new ApolloServer({
   typeDefs,
@@ -30,7 +31,9 @@ const { url } = await startStandaloneServer(server, {
 });
 
 console.log(`🚀  Server ready at: ${url}`);
-
+const uri = `mongodb+srv://kavehhashemi:${environmentVariables.mongoPassword}@flashcards.dlkterc.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.set("strictQuery", true);
-const db = await mongoose.connect("mongodb://127.0.0.1:27017/flashcards", {});
+// const db = await mongoose.connect("mongodb://127.0.0.1:27017/flashcards", {});
+
+const db = await mongoose.connect(uri);
 console.info("📚 Connected to db", db?.connections[0]?.host);

@@ -22,7 +22,6 @@ const Sets = ({ userId }: props) => {
   });
   if (loading) return <p>Loading...</p>;
   if (error) {
-    console.log(error.message, error.cause, error.stack);
     return <>{error.message}</>;
   } else {
     return (
@@ -41,7 +40,6 @@ const Sets = ({ userId }: props) => {
           );
         })}
         <AddSetDialog></AddSetDialog>
-        {error && <div>{error}</div>}
       </div>
     );
   }

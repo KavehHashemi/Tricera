@@ -1,6 +1,7 @@
 @use "navbar";
 @use "container";
 @use "card";
+@use "dialog";
 
 #root {
     display: flex;
@@ -12,13 +13,13 @@
 
 body {
     margin: 0;
-    // background-color: #000;
+    // background-color: rgb(134, 137, 220);
 
     a,
+    p,
+    span,
     text,
     #heading {
-        // color: #c8ff00;
         text-decoration: none;
-        // font-weight: 500;
     }
 }

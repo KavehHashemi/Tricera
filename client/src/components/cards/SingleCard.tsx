@@ -1,10 +1,15 @@
-import { useAppSelector } from "../../store/hooks";
 import "../../style/style.scss";
 import { handleDate } from "../../utils";
 import DeleteCardDialog from "./DeleteCardDialog";
 import EditCardDialog from "./EditCardDialog";
 
-import { Card, CardActions, CardContent, CardHeader } from "@mui/material";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  Divider,
+  Typography,
+} from "@mui/material";
 
 type props = {
   id: string;
@@ -24,26 +29,26 @@ const SingleCard = ({
   createdAt,
   set,
 }: props) => {
-  const { isLightMode } = useAppSelector((state) => state.mode);
   return (
-    <Card className="card">
-      <CardHeader></CardHeader>
+    <Card elevation={4} className="card">
       <CardContent>
-        <div>{question}</div>
-        <div>{answer}</div>
+        <Typography variant="h6" color="secondary" gutterBottom>
+          {question}
+        </Typography>
+        {/* <div>{answer}</div> */}
         <div>{handleDate(lastReading)}</div>
         <div>{handleDate(createdAt)}</div>
-        <div className="card-actions">
-          <EditCardDialog
-            question={question}
-            answer={answer}
-            id={id}
-            setId={set ?? ""}
-          ></EditCardDialog>
-          <DeleteCardDialog id={id} setId={set ?? ""}></DeleteCardDialog>
-        </div>
       </CardContent>
-      <CardActions></CardActions>
+      <Divider></Divider>
+      <CardActions>
+        <EditCardDialog
+          question={question}
+          answer={answer}
+          id={id}
+          setId={set ?? ""}
+        ></EditCardDialog>
+        <DeleteCardDialog id={id} setId={set ?? ""}></DeleteCardDialog>
+      </CardActions>
     </Card>
   );
 };
