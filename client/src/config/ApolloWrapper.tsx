@@ -36,8 +36,6 @@ export default function ApolloWrapper({
     return newContext;
   });
 
-  console.log(`authentication: ${bearerToken.length}`);
-
   const httpLink = new HttpLink({
     uri: "http://localhost:4000",
   });

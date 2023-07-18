@@ -9,7 +9,6 @@ import Navbar from "./components/navbar/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { lightThemeOptions, darkThemeOptions } from "./Themes";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
 
 const App = () => {
   const { user } = useAuth0();

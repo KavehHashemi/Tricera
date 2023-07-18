@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
 import jwksClient from "jwks-rsa";
-import { environmentVariables as EV } from "./const.js";
-
+import { config } from "dotenv";
+config();
 export const verifyToken = async (bearerToken: string) => {
   const client = jwksClient({
-    jwksUri: `https://${EV.issuer}.well-known/jwks.json`,
+    jwksUri: `https://${process.env.ISSUER}.well-known/jwks.json`,
   });
 
   const decodedToken = jwt.decode(bearerToken, { complete: true });
@@ -18,8 +18,8 @@ export const verifyToken = async (bearerToken: string) => {
       bearerToken,
       signingKey,
       {
-        audience: EV.audience,
-        issuer: `https://${EV.issuer}`,
+        audience: process.env.AUDIENCE,
+        issuer: `https://${process.env.ISSUER}`,
         algorithms: ["RS256"],
       },
       (err, decoded) => {
