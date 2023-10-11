@@ -7,7 +7,7 @@ import Cards from "./components/cards/Cards";
 import Home from "./components/Home";
 import Navbar from "./components/navbar/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
-import { lightThemeOptions, darkThemeOptions } from "./Themes";
+import { generateTheme } from "./Themes";
 import Paper from "@mui/material/Paper";
 
 const App = () => {
@@ -15,11 +15,10 @@ const App = () => {
   const { currentSet } = useAppSelector((state) => state.sets);
   const { isLightMode } = useAppSelector((state) => state.mode);
 
-  const darkTheme = createTheme(darkThemeOptions);
-  const lightTheme = createTheme(lightThemeOptions);
+  const customTheme = generateTheme(isLightMode);
 
   return (
-    <ThemeProvider theme={isLightMode ? lightTheme : darkTheme}>
+    <ThemeProvider theme={customTheme}>
       <Paper sx={{ minHeight: "100dvh" }}>
         <Navbar currentSet={currentSet.name} isLightMode={isLightMode}></Navbar>
         <Routes>
